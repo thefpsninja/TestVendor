@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * @var \TestVendor\TestModule\Block\Display $block
@@ -19,4 +19,10 @@ foreach ($datacollection as $data) {
 }
 echo "</table>";
 ?>
-<span> My Custom Tab.. </span>
+<h1>Return Request</h1>
+
+<form action="<?php echo $block->getFormAction() ?>" method="post">
+    <input name="name" type="text">
+    <input name="returnproduct" type="text">
+    <input type="submit" value="Send return request">
+</form>

@@ -79,10 +79,10 @@ class InstallSchema implements \Magento\Framework\Setup\InstallSchemaInterface
 				$installer->getTable('testvendor_testmodule_returnrequest'),
 				$setup->getIdxName(
 					$installer->getTable('testvendor_testmodule_returnrequest'),
-					['name','return_product','request_status'],
+					['name','return_product'],
 					\Magento\Framework\DB\Adapter\AdapterInterface::INDEX_TYPE_FULLTEXT
 				),
-				['name','return_product','request_status'],
+				['name','return_product'],
 				\Magento\Framework\DB\Adapter\AdapterInterface::INDEX_TYPE_FULLTEXT
 			);
 		}
