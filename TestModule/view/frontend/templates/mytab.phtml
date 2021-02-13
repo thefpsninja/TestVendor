@@ -1,0 +1,22 @@
+<?php 
+
+/**
+ * @var \TestVendor\TestModule\Block\Display $block
+ */
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$model=$objectManager->create('TestVendor\TestModule\Model\ReturnRequest');
+$datacollection=$model->getCollection();
+
+echo "<table border=1><tr align=center><th>Name</th><th>Return Product</th><th>Return Status</th><th>Request Status</th></tr>";
+foreach ($datacollection as $data) {
+    echo "<tr align=center>";
+        echo "<td>".$data->getName()."</td>";
+        echo "<td>".$data->getReturnProduct()."</td>";
+        echo "<td>".$data->getReturnStatus()."</td>";
+        echo "<td>".$data->getRequestStatus()."</td>";
+    echo "</tr>";
+}
+echo "</table>";
+?>
+<span> My Custom Tab.. </span>
