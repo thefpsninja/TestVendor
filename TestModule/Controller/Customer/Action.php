@@ -1,13 +1,13 @@
 <?php
 
-namespace Company\Module\Controller\Index;
+namespace TestVendor\TestModule\Controller\Customer;
 
 use Magento\Framework\Controller\ResultFactory;
 
-class Booking extends \Magento\Framework\App\Action\Action
+class Action extends \Magento\Framework\App\Action\Action
 {
     /**
-     * Booking action
+     * Return Request action
      *
      * @return void
      */
