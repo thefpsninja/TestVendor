@@ -4,8 +4,14 @@ namespace TestVendor\TestModule\Controller\Customer;
 
 use Magento\Framework\Controller\ResultFactory;
 
-class Post implements HttpPostActionInterface
+
+class Action extends \Magento\Framework\App\Action\Action
 {
+    function __construct(\TestVendor\TestModule\Model\ReturnRequest $customTable)
+{
+   $this->customTable = $customTable;
+}
+
     /**
      * Return Request action
      *
@@ -25,15 +31,15 @@ class Post implements HttpPostActionInterface
             $status = 1;
             $returnstatus = 1;
             $requeststatus = 0;
-
+            
             // Doing-something with...
-            $return = $this->returnsFactory->create();
-            $return->setName($name);
-            $return->setReturnProduct($returnproduct);
-            $return->setStatus($status);
-            $return->setReturnStatus($returnstatus);
-            $return->setRequestStatus($requeststatus);
-            $this->returnsRepository->save($return);
+            $model = $this->customTable->create();
+            $model->setName($name);
+            $model->setReturnProduct($returnproduct);
+            $model->setStatus($status);
+            $model->setReturnStatus($returnstatus);
+            $model->setRequestStatus($requeststatus);
+            $model->save();
 
             // Display the succes form validation message
             $this->messageManager->addSuccessMessage('Return Request Added');
