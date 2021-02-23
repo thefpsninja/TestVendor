@@ -15,7 +15,9 @@ class Post implements HttpPostActionInterface
     {
         // 1. POST request : Get booking data
         $post = (array)$this->getRequest()->getPost();
-
+        ob_start();
+        var_dump($post);
+        file_put_contents("var/log/namn.log", ob_get_clean());
         if (!empty($post)) {
             // Retrieve your form data
             $name = $post['name'];
