@@ -4,7 +4,7 @@ namespace TestVendor\TestModule\Controller\Customer;
 
 use Magento\Framework\Controller\ResultFactory;
 
-class Action extends \Magento\Framework\App\Action\Action
+class Post implements HttpPostActionInterface
 {
     /**
      * Return Request action
@@ -25,6 +25,13 @@ class Action extends \Magento\Framework\App\Action\Action
             $requeststatus = 0;
 
             // Doing-something with...
+            $return = $this->returnsFactory->create();
+            $return->setName($name);
+            $return->setReturnProduct($returnproduct);
+            $return->setStatus($status);
+            $return->setReturnStatus($returnstatus);
+            $return->setRequestStatus($requeststatus);
+            $this->returnsRepository->save($return);
 
             // Display the succes form validation message
             $this->messageManager->addSuccessMessage('Return Request Added');
