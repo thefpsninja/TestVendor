@@ -7,7 +7,9 @@ use Magento\Framework\Controller\ResultFactory;
 
 class Action extends \Magento\Framework\App\Action\Action
 {
-    function __construct(\TestVendor\TestModule\Model\ReturnRequest $customTable)
+    private \TestVendor\TestModule\Model\ReturnRequest $customTable;
+
+    protected function __construct(\TestVendor\TestModule\Model\ReturnRequest $customTable)
 {
    $this->customTable = $customTable;
 }
@@ -31,9 +33,10 @@ class Action extends \Magento\Framework\App\Action\Action
             $status = 1;
             $returnstatus = 1;
             $requeststatus = 0;
-            
+
             // Doing-something with...
-            $model = $this->customTable->create();
+            $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+            $model=$objectManager->get('TestVendor\TestModule\Model\ReturnRequest')->getConnection('TestVendor\TestModule\Model\ReturnRequest::DEFAULT_CONNECTION');
             $model->setName($name);
             $model->setReturnProduct($returnproduct);
             $model->setStatus($status);
