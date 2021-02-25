@@ -11,7 +11,7 @@ class Display extends \Magento\Framework\View\Element\Template
         // companymodule is given in routes.xml
         // controller_name is folder name inside controller folder
         // action is php file name inside above controller_name folder
-        return $this->getUrl('testmodule/customer/action', ['_secure' => true]);
+        return $this->getUrl('testmodule/customer/post', ['_secure' => true]);
         // here controller_name is index, action is booking
     }
 

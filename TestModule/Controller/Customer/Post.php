@@ -4,28 +4,27 @@ namespace TestVendor\TestModule\Controller\Customer;
 
 use Magento\Framework\Controller\ResultFactory;
 
-
-class Action extends \Magento\Framework\App\Action\Action
+class Post extends \Magento\Framework\App\Action\Action
 {
-    private \TestVendor\TestModule\Model\ReturnRequest $customTable;
+    protected \TestVendor\TestModule\Model\ReturnRequestFactory $_returnrequestFactory;
 
-    protected function __construct(\TestVendor\TestModule\Model\ReturnRequest $customTable)
-{
-   $this->customTable = $customTable;
-}
-
+    public function __construct(
+        \Magento\Framework\App\Action\Context $context,
+        \TestVendor\TestModule\Model\ReturnRequestFactory $returnrequestFactory
+    )
+    {
+        $this->_returnrequestFactory = $returnrequestFactory;
+        return parent::__construct($context);
+    }
     /**
      * Return Request action
      *
-     * @return void
+     * @return \Magento\Framework\Controller\ResultInterface
      */
     public function execute()
     {
         // 1. POST request : Get booking data
         $post = (array)$this->getRequest()->getPost();
-        ob_start();
-        var_dump($post);
-        file_put_contents("var/log/namn.log", ob_get_clean());
         if (!empty($post)) {
             // Retrieve your form data
             $name = $post['name'];
@@ -35,14 +34,13 @@ class Action extends \Magento\Framework\App\Action\Action
             $requeststatus = 0;
 
             // Doing-something with...
-            $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-            $model=$objectManager->get('TestVendor\TestModule\Model\ReturnRequest')->getConnection('TestVendor\TestModule\Model\ReturnRequest::DEFAULT_CONNECTION');
-            $model->setName($name);
-            $model->setReturnProduct($returnproduct);
-            $model->setStatus($status);
-            $model->setReturnStatus($returnstatus);
-            $model->setRequestStatus($requeststatus);
-            $model->save();
+            $datacollection=$this->_returnrequestFactory->create()
+            ->setName($name)
+            ->setReturnProduct($returnproduct)
+            ->setStatus($status)
+            ->setReturnStatus($returnstatus)
+            ->setRequestStatus($requeststatus);
+            $datacollection->save();
 
             // Display the succes form validation message
             $this->messageManager->addSuccessMessage('Return Request Added');
@@ -58,4 +56,3 @@ class Action extends \Magento\Framework\App\Action\Action
         $this->_view->renderLayout();
     }
 }
-?>
