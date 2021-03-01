@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="TestVendor_TestModule::greetings" title="Greetings" translate="title" module="TestVendor_TestModule" parent="Magento_Backend::content" sortOrder="50" dependsOnModule="TestVendor_TestModule" resource="TestVendor_TestModule::greetings"/>
+        <add id="TestVendor_TestModule::greetings_returnrequests" title="Refound Requests" translate="title" module="TestVendor_TestModule" parent="TestVendor_TestModule::greetings" sortOrder="10" dependsOnModule="TestVendor_TestModule" action="testmodule/returnrequests" resource="TestVendor_TestModule::greetings"/>
+    </menu>
+</config>
